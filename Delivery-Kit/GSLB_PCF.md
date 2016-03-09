@@ -46,13 +46,13 @@ A common approach to achieving GSLB is via intelligent DNS resolution and is the
 # Planning & Pre-Requisites
 Planning for PCF to host an application across foundations requires some basic planning and setup...
 
-**1**: What is the application routed namespace?
+**1**: Application routed namespace/domain(s)
 
 In the examples covered in this delivery kit,  all applications will be mapped to a _*.customer0.net_ route.   This route will exist as part of a "shared-domain" in both of our example PCF foundations.
 
 example: _customer0.net_
 
-**2**: PCF System & App domains?
+**2**: PCF System & App domains
 
 Each foundation will still require its own resolvable url space for system access (_api, apps, login, uaa, etc_...) as well as local routed domains that are specific to each foundation for local only route mapps (_*.site-a.pcflab.net_).  This is so that traffic may be routed direct to a foundation regardless of the GSLB state, as well as for admin/pipeline access to actually push apps via the Cloud Foundry api.  These are the same domains that PCF Operations Manager describes as _System_ & _Apps_ Domains.
 
@@ -65,18 +65,16 @@ example:
 | site b        | system		         | _sys.site-b.pcflab.net_    |
 | site b        | apps (shared domain) | _cfapps.site-b.pcflab.net_ |
 
-**3**: Who owns the DNS for the application namespace?
+**3**: DNS
 
-The DNS delegation for the chosen ...
+The DNS delegation for the chosen Application Domains must 
 
-**4**: SSL, SANs, & SNI ...
+**4**: SSL
+
+SANs
 
    
 
-## Solution Requirements
-### PCF
-### SSL
-### DNS
 ### GSLB Provider Requirements
 * Amazon Route 53
 * Azure Traffic Manager
