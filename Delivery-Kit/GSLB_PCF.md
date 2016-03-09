@@ -29,10 +29,10 @@ It is assumed that readers of this document are familiar with administration of 
 
 * Pivotal Cloud Foundry 1.6/1.7
 * DNS
-* GSLB PLatfrom: AWS, Azure, Dyn, F5
+* GSLB PLatform: AWS, Azure, Dyn, F5
 
 # Solution Logical Architecture
-The main goal of a GSLB & PCF architecture are to provide optimized traffic distribution across PCF foundations deployed in multiple DataCenters or Geographies.   
+The main goal of a GSLB & PCF architecture is to provide optimized traffic distribution across PCF foundations deployed in multiple DataCenters or Geographies.   
 
 <p align="center">
 <img src="images/Overview.png">
