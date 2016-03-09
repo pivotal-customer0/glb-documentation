@@ -23,6 +23,10 @@ The
 
 # Solution Logical Architecture
 
+<p align="center">
+<img src="images/Overview.png">
+</p>
+
 # Planning & Pre-Requisites
 ## Solution Requirements
 ### PCF
