@@ -17,15 +17,22 @@ Global Server Load Balancing (GSLB) PCF
 
 # Overview
 
-This document describes 4 solutions on how to deploy multiple instances (or foundations) of PCF and load balance between them with various public and priave on prem GSLB methods.
+This document describes 4 solutions on how to deploy multiple instances (or foundations) of PCF and load balance between them with various public and private on premesis GSLB methods.  This Delivery Kit is broken into the following sections
 
-The 
+* Solution Logical Architecture
+* Planning & Pre-Requisites
+* Solution Deployment
+
+This document will focus on the client facing or "North/South" traffic management points for an application to be published in multiple foundations.  It is beyond the scope of this Delivery Kit to cover topics such as distributed Application or Data architecture.  This topics will be covered in another Customer0 Delivery Kit.
 
 # Solution Logical Architecture
+The main goals of a GSLB & PCF architecture are to provide optimized traffic distribution across PCF foundations deployed in multiple DataCenters or Geographies.   
 
 <p align="center">
 <img src="images/Overview.png">
 </p>
+
+Warning: Applications designed for peer communication or requiring access to geographically replicated data services will incur design and operational difficulty when PCF Foundations are separated by highly latent & geographically dispersed networks.
 
 # Planning & Pre-Requisites
 ## Solution Requirements
