@@ -25,17 +25,35 @@ This document describes 4 solutions on how to deploy multiple instances (or foun
 
 This document will focus on the client facing or "North/South" traffic management points for an application to be published in multiple foundations.  It is beyond the scope of this Delivery Kit to cover topics such as distributed Application or Data architecture.  This topics will be covered in another Customer0 Delivery Kit.
 
+It is assumed that readers of this document are familiar with administration of the following Platforms/Technologies:
+
+* Pivotal Cloud Foundry 1.6/1.7
+* DNS
+* GSLB PLatfrom: AWS, Azure, Dyn, F5
+
 # Solution Logical Architecture
-The main goals of a GSLB & PCF architecture are to provide optimized traffic distribution across PCF foundations deployed in multiple DataCenters or Geographies.   
+The main goal of a GSLB & PCF architecture are to provide optimized traffic distribution across PCF foundations deployed in multiple DataCenters or Geographies.   
 
 <p align="center">
 <img src="images/Overview.png">
 <br>
 </p>
 
-Warning: Applications designed for peer communication or requiring access to geographically replicated data services will incur design and operational difficulty when PCF Foundations are separated by highly latent & geographically dispersed networks.
+**Warning**: Applications designed for peer communication or requiring access to geographically replicated data services will incur design and operational difficulty when PCF Foundations are separated by highly latent & geographically dispersed networks.
 
 # Planning & Pre-Requisites
+Planning for PCF to host an application across foundations requires seom basic planning and setup...
+
+**1**: What is the application routed namespace?
+
+In the examples covered in this delivery kit,  all applications will be mapped to a _*.customer0.net_ route.   This route will exist as part of a "shared-domain" in both of our example PCF foundations.
+
+**2**: Who owns the DNS?
+
+**3**: SSL, SANs, & SNI ...
+
+   
+
 ## Solution Requirements
 ### PCF
 ### SSL
