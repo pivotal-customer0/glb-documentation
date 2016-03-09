@@ -39,6 +39,115 @@ Warning: Applications designed for peer communication or requiring access to geo
 ## Solution Requirements
 ### PCF
 ### SSL
+In order to provide a secure application endpoint a TLS/SSL certificate will need to be obtained and also a determination on where to terminate the SSL/TLS connection. Generally SSL termination will be done on the load balancing device (i.e. F5, Brocade) or cloud load balancers and this guide covers that particular use case. However the implementation will vary depending on the security requirements. Please refer to Pivotal's document for more [details](http://docs.pivotal.io/pivotalcf/opsguide/ssl-term.html). Although the reference is to vSphere deployments the idea is the same regardless where the deployment happens. For PCF on a IAAS provider, refer to the documentation on AWS and Azure respectively.
+
+* [AWS](http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elastic-load-balancing.html)
+* [Azure](https://azure.microsoft.com/en-us/documentation/articles/application-gateway-introduction/)
+
+
+#### Obtaining a SSL/TLS Certificate
+One of the first things you'll need is a SSL/TLS certificate. Generally the steps are: 
+
+1. Create a Certificate Request
+2. Have the certificate signed by a Certificate Authority or CA (i.e. Symantec, GoDaddy, DigiCert, etc)
+3. Install the certifcate either on the load balancer or the web servers
+
+##### Generating a Self-Signed Certificate
+Many times you just need to test a setup or perform a POC. Generating certificate requests and having a CA sign them for testing generally can be costly and a un-necessary expense. Fortunately you can create a self-signed certificate for testing purposes.
+
+There are two ways to create the certificate. First you can use the generate self-signed certificate through OpsManager. Secondly you can do this by using OpenSSL. 
+
+###### Using OpsManager
+One of the easiest ways to accomplish this is to use OpsManager to generate the self-signed certificate for you. Refer to the link [here](http://docs.pivotal.io/pivotalcf/opsguide/security_config.html). Once you have generated a self-signed certificate you can copy and paste the certificate and private key into a file in a terminal and deliver the certificate to device or cloud load balancer. The certificate is in a PEM format.
+
+For IAAS provider refer to the following documentation for AWS and Azure respectively:
+
+* [AWS](http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/ssl-server-cert.html)
+* [Azure](https://azure.microsoft.com/en-us/documentation/articles/application-gateway-ssl/)
+
+For physical load balancers refer to the vendor documentation.
+
+###### Using OpenSSL
+Online information can be found here:
+
+* <http://apetec.com/support/GenerateSAN-CSR.htm>
+* <http://wiki.cacert.org/FAQ/subjectAltName>
+* <http://www.openssl.org/docs/manmaster/apps/x509v3_config.html>
+
+The steps are:
+
+1. Create a openssl configuration file
+2. Add the locality information
+3. Add the Subject Alternate Name
+4. Create a Certificate Request
+5. Sign the certificate
+6. Upload the certificate to the cloud provider or load balancer device
+
+* Create a openssl.cnf file. Here is an example:
+
+```
+[ req ]
+default_bits       = 4096
+default_md         = sha512
+default_keyfile    = my-private-key.pem
+prompt             = no
+encrypt_key        = no
+
+# base request
+distinguished_name = req_distinguished_name
+
+# extensions
+req_extensions     = v3_req
+
+# distinguished_name
+[ req_distinguished_name ]
+countryName            = "US"                     # C=
+stateOrProvinceName    = "NY"                     # ST=
+localityName           = "NYC"                    # L=
+postalCode             = "10011"                  # L/postalcode=
+streetAddress          = "625 Avenue of Americas" # L/street=
+organizationName       = "Pivotal Software"       # O=
+organizationalUnitName = "Platform Architect"     # OU=
+commonName             = "*.jyipivotal.io"        # CN=
+emailAddress           = "jyi@pivotal.io"         # CN/emailAddress=
+
+# req_extensions
+[ v3_req ]
+# The subject alternative name extension allows various literal values to be 
+# included in the configuration file
+# http://www.openssl.org/docs/apps/x509v3_config.html
+subjectAltName  = 	DNS:*.login.cfsys.jyipivotal.io,DNS:*.uaa.cfsys.jyipivotal.io,DNS:*.api.cfsys.jyipivotal.io,DNS:*.apps.jyipivotal.io,DNS:*.system.jyipivotal.io # multidomain certificate
+	
+# vim:ft=config
+```
+
+* Create a certificate request. An example below:
+
+```
+openssl req -config openssl.cnf -new -out csr-san.pem`
+```
+
+The private key gets created when you run this command 
+
+
+* Sign the certificate:
+
+```
+openssl x509 -req -days 720 -in csr-san.pem -signkey my-private-key.pem -out san-certificate.pem \
+            -extensions v3_req -extfile openssl.cnf
+```
+
+* Upload the certificate to the device or Cloud Provider.
+
+For IAAS provider refer to the following documentation for AWS and Azure respectively:
+
+* [AWS](http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/ssl-server-cert.html)
+* [Azure](https://azure.microsoft.com/en-us/documentation/articles/application-gateway-ssl/)
+
+For physical load balancers refer to the vendor documentation.
+
+
+
 ### DNS
 ### GSLB Provider Requirements
 * Amazon Route 53
