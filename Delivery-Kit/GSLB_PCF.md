@@ -1,7 +1,7 @@
 ---
 title: GSLB & PCF
 layout: post
-authors: Merlin Glynn, John Yi
+authors: Merlin Glynn, John Yi, Jason Sherron, John Calabrese
 permalink: 
 source-id: 
 published: false
