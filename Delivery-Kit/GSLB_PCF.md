@@ -30,6 +30,7 @@ The main goals of a GSLB & PCF architecture are to provide optimized traffic dis
 
 <p align="center">
 <img src="images/Overview.png">
+<br>
 </p>
 
 Warning: Applications designed for peer communication or requiring access to geographically replicated data services will incur design and operational difficulty when PCF Foundations are separated by highly latent & geographically dispersed networks.
