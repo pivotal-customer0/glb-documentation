@@ -169,7 +169,7 @@ subjectAltName  = 	DNS:*.login.cfsys.jyipivotal.io,DNS:*.uaa.cfsys.jyipivotal.io
 * Create a certificate request. An example below:
 
 ```
-openssl req -config openssl.cnf -new -out csr-san.pem`
+openssl req -config openssl.cnf -new -out csr-san.pem
 ```
 
 The private key gets created when you run this command 
@@ -186,8 +186,8 @@ openssl x509 -req -days 720 -in csr-san.pem -signkey my-private-key.pem -out san
 
 For IAAS provider refer to the following documentation for AWS and Azure respectively:
 
-* [AWS](http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/ssl-server-cert.html)
-* [Azure](https://azure.microsoft.com/en-us/documentation/articles/application-gateway-ssl/)
+* [AWS - SSL Certificates for Elastic Load Balancing](http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/ssl-server-cert.html)
+* [Azure - Configure an application gateway for SSL offload by using the classic deployment model](https://azure.microsoft.com/en-us/documentation/articles/application-gateway-ssl/)
 
 For physical load balancers refer to the vendor documentation.
 
