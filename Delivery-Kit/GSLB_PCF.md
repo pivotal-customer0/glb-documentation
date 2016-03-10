@@ -79,15 +79,15 @@ SANs
 ## Solution Requirements
 ### PCF
 ### SSL
-In order to provide a secure application endpoint a TLS/SSL certificate will need to be obtained and also a determination on where to terminate the SSL/TLS connection. Generally SSL termination will be done on the load balancing device (i.e. F5, Brocade) or cloud load balancers and this guide covers that particular use case. However the implementation will vary depending on the security requirements. For more details:
+In order to provide a secure application endpoint a TLS/SSL certificate will need to be obtained and also a determination on where to terminate the SSL/TLS connection. Generally SSL termination will be done on the load balancing device (i.e. F5, Brocade) or cloud load balancers. This guide will cover that use case. However the implementation will vary depending on the security requirements. For more details:
 
 * [Configuring Pivotal Cloud Foundry® SSL Termination for vSphere Deployments](http://docs.pivotal.io/pivotalcf/opsguide/ssl-term.html)
 * [Providing a Certificate for your SSL Termination Point](https://docs.pivotal.io/pivotalcf/opsguide/security_config.html) 
 
-For PCF on a IAAS provider, refer to the documentation on AWS and Azure respectively.
+For load balancers on a IAAS provider refer to the documentation below:
 
-* [AWS](http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elastic-load-balancing.html)
-* [Azure](https://azure.microsoft.com/en-us/documentation/articles/application-gateway-introduction/)
+* [AWS - What Is Elastic Load Balancing?](http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elastic-load-balancing.html)
+* [Azure - Application Gateway overview](https://azure.microsoft.com/en-us/documentation/articles/application-gateway-introduction/)
 
 
 #### Obtaining a SSL/TLS Certificate
