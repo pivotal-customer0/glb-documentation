@@ -79,7 +79,12 @@ SANs
 ## Solution Requirements
 ### PCF
 ### SSL
-In order to provide a secure application endpoint a TLS/SSL certificate will need to be obtained and also a determination on where to terminate the SSL/TLS connection. Generally SSL termination will be done on the load balancing device (i.e. F5, Brocade) or cloud load balancers and this guide covers that particular use case. However the implementation will vary depending on the security requirements. Please refer to Pivotal's document for more [details](http://docs.pivotal.io/pivotalcf/opsguide/ssl-term.html). Although the reference is to vSphere deployments the idea is the same regardless where the deployment happens. For PCF on a IAAS provider, refer to the documentation on AWS and Azure respectively.
+In order to provide a secure application endpoint a TLS/SSL certificate will need to be obtained and also a determination on where to terminate the SSL/TLS connection. Generally SSL termination will be done on the load balancing device (i.e. F5, Brocade) or cloud load balancers and this guide covers that particular use case. However the implementation will vary depending on the security requirements. For more details:
+
+* [Configuring Pivotal Cloud Foundry® SSL Termination for vSphere Deployments](http://docs.pivotal.io/pivotalcf/opsguide/ssl-term.html)
+* [Providing a Certificate for your SSL Termination Point](https://docs.pivotal.io/pivotalcf/opsguide/security_config.html) 
+
+For PCF on a IAAS provider, refer to the documentation on AWS and Azure respectively.
 
 * [AWS](http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elastic-load-balancing.html)
 * [Azure](https://azure.microsoft.com/en-us/documentation/articles/application-gateway-introduction/)
@@ -98,12 +103,12 @@ Many times you just need to test a setup or perform a POC. Generating certificat
 There are two ways to create the certificate. First you can use the generate self-signed certificate through OpsManager. Secondly you can do this by using OpenSSL. 
 
 ###### Using OpsManager
-One of the easiest ways to accomplish this is to use OpsManager to generate the self-signed certificate for you. Refer to the link [here](http://docs.pivotal.io/pivotalcf/opsguide/security_config.html). Once you have generated a self-signed certificate you can copy and paste the certificate and private key into a file in a terminal and deliver the certificate to device or cloud load balancer. The certificate is in a PEM format.
+One of the easiest ways to accomplish this is to use OpsManager to generate the self-signed certificate for you. Refer to the link [here](http://docs.pivotal.io/pivotalcf/opsguide/security_config.html). Once you have generated a self-signed certificate you can copy and paste the certificate and private key into a local file and deliver the certificate to the load-balancing device or IAAS cloud load balancer. The generated certificate will be in a PEM format.
 
 For IAAS provider refer to the following documentation for AWS and Azure respectively:
 
-* [AWS](http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/ssl-server-cert.html)
-* [Azure](https://azure.microsoft.com/en-us/documentation/articles/application-gateway-ssl/)
+* [AWS - SSL Certificates for Elastic Load Balancing](http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/ssl-server-cert.html)
+* [Azure - Configure an application gateway for SSL offload by using the classic deployment model](https://azure.microsoft.com/en-us/documentation/articles/application-gateway-ssl/)
 
 For physical load balancers refer to the vendor documentation.
 
