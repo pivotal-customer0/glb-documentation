@@ -44,7 +44,6 @@ A common approach to achieving GSLB is via intelligent DNS resolution and is the
 **Warning**: Applications designed for peer communication or requiring access to geographically replicated data services will incur design and operational difficulty when PCF Foundations are separated by highly latent & geographically dispersed networks.
 
 # Planning & Pre-Requisites
-<<<<<<< HEAD
 Planning for PCF to host an application across foundations requires some basic planning and setup...
 
 **1**: Application routed namespace/domain(s)
@@ -187,10 +186,7 @@ For IAAS provider refer to the following documentation for AWS and Azure respect
 
 For physical load balancers refer to the vendor documentation.
 
-
-
 ### DNS
->>>>>>> authoring
 ### GSLB Provider Requirements
 * Amazon Route 53
 * Azure Traffic Manager
