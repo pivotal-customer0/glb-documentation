@@ -205,7 +205,7 @@ In our example, the apex of our example zone customer0.net is delegated to AWS R
 
 AWS Traffic Flow policy (beyond initial domain setup) is split into two parts: Traffic policy, and policy records.
 
-Traffic policies define how traffic will be routed, without being tied to any particular domain or host name. In our basic example, we'll set up a simple failover (active/passive) configuration between two sites/AZs.
+Traffic policies define how traffic will be routed, without being tied to any particular domain or host name. In our basic example, we'll set up a simple failover (active/passive) configuration between two sites/AZs. (And point out what would change for active/active.)
 
 ###Health checks
 CF exposes a basic target for health checking. It can be probed for existence as a simple health test. You can also opt to parse details from the response JSON. Every CF installation exposes it at https://&lt;public entry point&gt;:443/v2/info
@@ -221,7 +221,7 @@ CF exposes a basic target for health checking. It can be probed for existence as
 ###Steps
 1. Create a new Traffic policy, providing useful name and comments. After saving this metadata, you'll be presented with a GUI mapping tool. 
 2. Since we'll be handing out IPv4 A records, select "A: IP address in IPv4 format" as start point. 
-3. Create a Failover rule, with Primary and secondary set to the site A address records of each CF installation. Set the health checks per site that you created in the prereqs.
+3. Create a Failover rule, with Primary and secondary set to the site A address records of each CF installation. Set the health checks per site that you created in the prereqs. (If instead you wanted ACTIVE/ACTIVE configuration of your sites, simply use the "Weighted" rule.)
 4. Create endpoints for each separate CF installation, pointing at the public IP address of each CF installation.
 <img src="images/AWSTrafficflowpolicyexample.png">
 5. Save the policy, and optionally create a policy record, if you want to put it into production immeidately. This policy DNS record will be the public entry point to the load-balanced configuration, so it *must* match the installed route name in the CF routing tier. 
