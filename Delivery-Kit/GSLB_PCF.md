@@ -244,7 +244,7 @@ CF exposes a basic target for health checking. It can be probed for existence as
 4. Configure any regional rules (such as geographic preferences), or leave set to default for full active-active.
 <img src="images/dyn/Dyn-pools.png">
 5. Set a TTL for your records that are appropriate. Depending on your health checking, this value will typically be half of your health check interval. A good starting point is 10 minutes health check and 5 minute TTL.
-6. Set the health monitor to TCP on port 443. This provides basic health checking that the CF instance is running and answering on the HTTPS port.
+6. Set the health monitor to TCP on port 443. This provides basic health checking that the CF instance is running and answering on the HTTPS port. (HTTPS monitoring isn't currently supported without deploying a separate CF app.)
 <img src="images/dyn/Dyn-healthcheck.png">
 7. Set any notification options for any events of interest.
 8. "Store" the configuration and be sure to "PUBLISH" it when ready to go live.
@@ -260,10 +260,6 @@ When complete, you should see some auto-generated A records show up in your DNS 
 
 Details
 
-## GSLB PCF w/ AWS Dyn Managed DNS Traffic Management
-### Steps
-
-Details
 
 ## GSLB PCF w/ F5
 ### Steps
