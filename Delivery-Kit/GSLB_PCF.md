@@ -195,8 +195,25 @@ For physical load balancers refer to the vendor documentation.
 ### GSLB Provider Requirements
 * Amazon Route 53
 * Azure Traffic Manager
-* Dyn
 * F5 (On Prem)
+
+##Dyn
+###Prerequisites
+1. We  assume that you've created your zone in DNS in "Manage DNS" in DynECT, and have correctly delegated the zone to Dyn.
+2. Your application is deployed on CF with a known app name with the routes installed.
+
+### Steps
+1. In your zone under "Manage", you will add a new node that is the hostname of the app you're managing. In our example, we create a sample node named "Hello" which matches our "hello" app which is already deployed on our target foundation.
+2. In the manage screen for the new node, select "Add Service" and add the traffic management service. (Depending on your Dyn subscription, you might choose Active Failover or Traffic Director. The same basic steps are applicable; we'll use Traffic Manager to create an Active/Active configuration.)
+3. In the traffic management screen, create (at a minimum) a global pool containing the IP addresses of your local load balancers in each site. Serve mode will normally be "Monitor & Obey" if you want dynamic health checking to up/down your app based on health.
+4. Configure any regional rules (such as geographic preferences), or leave set to default for full active-active.
+5. Set a TTL for your records that are appropriate. Depending on your health checking, this value will typically be half of your health check interval. A good starting point is 10 minutes health check and 5 minute TTL.
+6. Set the health monitor to TCP on port 443. This provides basic health checking that the CF instance is running and answering on the HTTPS port.
+7. Set any notification options for any events of interest.
+8. "Store" the configuration and be sure to "PUBLISH" it when ready to go live.
+
+When complete, you should see some auto-generated A records show up in your DNS zone, with a TTL of half the healthcheck interval.
+
 
 # Solution Deployment 
 ## GSLB PCF w/ AWS Route 53 Traffic Flow
@@ -214,7 +231,7 @@ CF exposes a basic target for health checking. It can be probed for existence as
 1. We will assume that you've created your AZ/foundation zone in DNS in Rt53 under "Hosted zones".
 <img src="images/AWSRt53domain.png">
 <img src="images/customer0WHOIS.png">
-2. Create health checks (if desired) in "health checks". In our example, we create one health check per site from tthe last step, using the URL formatted from the "Health checks" section.
+2. Create health checks (if desired) in "health checks". In our example, we create one health check per site from tthe last step, using the URL formatted from the "Health checks" section. Note that we need to create a separate site-specific health check with the correct Host header, if we want to take advantage of HTTPS health checking. (Or you can skip this and just use TCP health checking on port 443.)
 <img src="images/AWSTrafficflowhealthdashboard.png">
 
 
