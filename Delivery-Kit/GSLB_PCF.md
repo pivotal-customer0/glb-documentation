@@ -237,15 +237,20 @@ CF exposes a basic target for health checking. It can be probed for existence as
 
 ### Steps
 1. In your zone under "Manage", you will add a new node that is the hostname of the app you're managing. In our example, we create a sample node named "Hello" which matches our "hello" app which is already deployed on our target foundation.
+<img src="images/dyn/Dyn-zonestart.png">
 2. In the manage screen for the new node, select "Add Service" and add the traffic management service. (Depending on your Dyn subscription, you might choose Active Failover or Traffic Director. The same basic steps are applicable; we'll use Traffic Manager to create an Active/Active configuration.)
+<img src="images/dyn/Dyn-addtm.png">
 3. In the traffic management screen, create (at a minimum) a global pool containing the IP addresses of your local load balancers in each site. Serve mode will normally be "Monitor & Obey" if you want dynamic health checking to up/down your app based on health.
+<img src="images/dyn/Dyn-pools.png">
 4. Configure any regional rules (such as geographic preferences), or leave set to default for full active-active.
 5. Set a TTL for your records that are appropriate. Depending on your health checking, this value will typically be half of your health check interval. A good starting point is 10 minutes health check and 5 minute TTL.
 6. Set the health monitor to TCP on port 443. This provides basic health checking that the CF instance is running and answering on the HTTPS port.
+7. <img src="images/dyn/Dyn-healthcheck.png">
 7. Set any notification options for any events of interest.
 8. "Store" the configuration and be sure to "PUBLISH" it when ready to go live.
-
+<img src="images/dyn/Dyn-publish.png">
 When complete, you should see some auto-generated A records show up in your DNS zone, with a TTL of half the healthcheck interval.
+<img src="images/dyn/Dyn-finalzone.png">
 
 
 ## GSLB PCF w/ Azure Traffic Manager
