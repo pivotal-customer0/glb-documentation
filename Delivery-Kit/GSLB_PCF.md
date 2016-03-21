@@ -214,10 +214,10 @@ CF exposes a basic target for health checking. It can be probed for existence as
 
 ###Prerequisites
 1. We will assume that you've created your AZ/foundation zone in DNS in Rt53 under "Hosted zones".
-<img src="images/AWSRt53domain.png">
-<img src="images/customer0WHOIS.png">
+<img src="images/aws/AWSRt53domain.png">
+<img src="images/aws/customer0WHOIS.png">
 2. Create health checks (if desired) in "health checks". In our example, we create one health check per site from tthe last step, using the URL formatted from the "Health checks" section. Note that we need to create a separate site-specific health check with the correct Host header, if we want to take advantage of HTTPS health checking. (Or you can skip this and just use TCP health checking on port 443.)
-<img src="images/AWSTrafficflowhealthdashboard.png">
+<img src="images/aws/AWSTrafficflowhealthdashboard.png">
 
 
 ###Steps
@@ -225,9 +225,9 @@ CF exposes a basic target for health checking. It can be probed for existence as
 2. Since we'll be handing out IPv4 A records, select "A: IP address in IPv4 format" as start point. 
 3. Create a Failover rule, with Primary and secondary set to the site A address records of each CF installation. Set the health checks per site that you created in the prereqs. (If instead you wanted ACTIVE/ACTIVE configuration of your sites, simply use the "Weighted" rule.)
 4. Create endpoints for each separate CF installation, pointing at the public IP address of each CF installation.
-<img src="images/AWSTrafficflowpolicyexample.png">
+<img src="images/aws/AWSTrafficflowpolicyexample.png">
 5. Save the policy, and optionally create a policy record, if you want to put it into production immeidately. This policy DNS record will be the public entry point to the load-balanced configuration, so it *must* match the installed route name in the CF routing tier. 
-<img src="images/AWSTrafficflowpolicycreation.png">
+<img src="images/aws/AWSTrafficflowpolicycreation.png">
 6. If you didn't attach a policy name at policy creation time, when you're ready to go to production, create the matching policy name and you're live.
 
 ##Dyn
@@ -256,7 +256,19 @@ When complete, you should see some auto-generated A records show up in your DNS 
 
 
 ## GSLB PCF w/ Azure Traffic Manager
+###Prerequisites
+1. Since Azure Traffic Manager is not a full DNS solution, your zone must be hosted elsewhere. 
+2. You must create site-specific DNS A records that point to the API endpoint of each your site installations, i.e. "api.app.site-A.pcflab.net". Check that this is working by checking for the health status in a browser, e.g. "https://api.app.site-a.pcflab.net/v2/info".
+
 ### Steps
+1. Create a Traffic Management profile in the new portal.
+
+<img src="images/azure/1-Add-TMProfile.png">
+
+2. Create a new Traffic Management policy
+
+<img src="images/azure/2-CreateTM.png">
+
 
 Details
 
