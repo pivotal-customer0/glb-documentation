@@ -265,16 +265,16 @@ When complete, you should see some auto-generated A records show up in your DNS 
 <img src="images/azure/1-Add-TMProfile.png">
 2. Create a new Traffic Management policy. In this example, we'll use equal weights across sites, providing an active/active configuration. You could also opt for Failover if you wanted active/passive or performance-based to direct clients to their "nearest"<br>
 <img src="images/azure/2-CreateTM.png">
-3. Configure. First, set up your health checks for HTTPS on port 443 using /v2/info, if health checking is desired.<br>
+3. "Configuration" panel: Set up your health checks for HTTPS on port 443 using /v2/info, if health checking is desired.<br>
 <img src="images/azure/3-ConfigureTM.png"/>
-4. Endpoint setup - in this example, we'll use equal weights across sites, providing an active/active configuration.<br>
+4. Endpoint panel - in this example, we'll use equal weights across sites, providing an active/active configuration.<br>
 <img src="images/azure/4-Endpoint.png"/>
 <br>Health checking starts once you've saved your endpoints.<br>
 <img src="images/azure/5-checking.png"/>
 6. Upon completion, you'll be returned to the dashboard, where you'll see the new traffic management policy and endpoint status.<br>
 <img src="images/azure/6-final.png"/>
 7. Test your setup. We like wget and curl
-wget https://c0.trafficmanager.net/ --header "Host: hello.customer0.net" --no-check-certificate
+`wget https://c0.trafficmanager.net/ --header "Host: hello.customer0.net" --no-check-certificate`
 8. Create/update the CNAME for your app (i.e., "hello.customer0.net") to point to Azure traffic manager, e.g. hello.customer0.net IN CNAME c0.trafficmanager.net.
 
 ## GSLB PCF w/ F5
