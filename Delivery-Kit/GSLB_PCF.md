@@ -262,16 +262,13 @@ When complete, you should see some auto-generated A records show up in your DNS 
 
 ### Steps
 1. Create a Traffic Management profile in the new portal.
-
 <img src="images/azure/1-Add-TMProfile.png">
-
 2. Create a new Traffic Management policy
-
 <img src="images/azure/2-CreateTM.png">
-
-
-Details
-
+3. Configure
+4. Endpoints
+5. Health checking starts
+6. Completed <img src="images/azure/6-final.png"/>
 
 ## GSLB PCF w/ F5
 ### Steps
