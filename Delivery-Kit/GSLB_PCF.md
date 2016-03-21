@@ -215,7 +215,7 @@ CF exposes a basic target for health checking. It can be probed for existence as
 ###Prerequisites
 1. We will assume that you've created your AZ/foundation zone in DNS in Rt53 under "Hosted zones".
 <img src="images/aws/AWSRt53domain.png">
-<img src="images/aws/customer0WHOIS.png">
+<img src="images/customer0WHOIS.png">
 2. Create health checks (if desired) in "health checks". In our example, we create one health check per site from tthe last step, using the URL formatted from the "Health checks" section. Note that we need to create a separate site-specific health check with the correct Host header, if we want to take advantage of HTTPS health checking. (Or you can skip this and just use TCP health checking on port 443.)
 <img src="images/aws/AWSTrafficflowhealthdashboard.png">
 
