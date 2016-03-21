@@ -258,17 +258,21 @@ When complete, you should see some auto-generated A records show up in your DNS 
 ## GSLB PCF w/ Azure Traffic Manager
 ###Prerequisites
 1. Since Azure Traffic Manager is not a full DNS solution, your zone must be hosted elsewhere. 
-2. You must create site-specific DNS A records that point to the API endpoint of each your site installations, i.e. "api.app.site-A.pcflab.net". Check that this is working by checking for the health status in a browser, e.g. "https://api.app.site-a.pcflab.net/v2/info".
+2. You must create site-specific DNS A records that point to the API endpoint of each your site installations, i.e. "api.sys.site-a.pcflab.net". Check that this is working by checking for the health status in a browser, e.g. "https://api.sys.site-a.pcflab.net/v2/info".
 
 ### Steps
-1. Create a Traffic Management profile in the new portal.
+1. Create a Traffic Management profile in the new portal.<br>
 <img src="images/azure/1-Add-TMProfile.png">
-2. Create a new Traffic Management policy
+2. Create a new Traffic Management policy<br>
 <img src="images/azure/2-CreateTM.png">
-3. Configure
-4. Endpoints
-5. Health checking starts
-6. Completed <img src="images/azure/6-final.png"/>
+3. Configure. First, set up your health checks for HTTPS on port 443 using /v2/info, if health checking is desired.<br>
+<img src="images/azure/3-ConfigureTM.png"/>
+4. Endpoint setup - in this example, we'll use equal weights across sites, providing an active/active configuration. You could also opt for Failover if you wanted active/passive or performance-based to direct clients to their "nearest" sites.<br>
+<img src="images/azure/4-Endpoint.png"/>
+<br>Health checking starts once you've saved your endpoints.<br>
+<img src="images/azure/5-checking.png"/>
+6. Upon completion, you'll be returned to the dashboard, where you'll see the new traffic management policy and endpoint status.<br>
+<img src="images/azure/6-final.png"/>
 
 ## GSLB PCF w/ F5
 ### Steps
