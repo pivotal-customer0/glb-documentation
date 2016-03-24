@@ -221,14 +221,15 @@ CF exposes a basic target for health checking. It can be probed for existence as
 
 
 ###Steps
-1. Create a new Traffic policy, providing useful name and comments. After saving this metadata, you'll be presented with a GUI mapping tool. 
-2. Since we'll be handing out IPv4 A records, select "A: IP address in IPv4 format" as start point. 
-3. Create a Failover rule, with Primary and secondary set to the site A address records of each CF installation. Set the health checks per site that you created in the prereqs. (If instead you wanted ACTIVE/ACTIVE configuration of your sites, simply use the "Weighted" rule.)
-4. Create endpoints for each separate CF installation, pointing at the public IP address of each CF installation.
+1. Click on the Route53 icon from the Amazon Web Services page.
+2. Create a new Traffic policy, providing useful name and comments. After saving this metadata, you'll be presented with a GUI mapping tool. 
+3. Since we'll be handing out IPv4 A records, select "A: IP address in IPv4 format" as start point. 
+4. Create a Failover rule, with Primary and secondary set to the site A address records of each CF installation. Set the health checks per site that you created in the prereqs. (If instead you wanted ACTIVE/ACTIVE configuration of your sites, simply use the "Weighted" rule.)
+5. Create endpoints for each separate CF installation, pointing at the public IP address of each CF installation.
 <img src="images/aws/AWSTrafficflowpolicyexample.png">
-5. Save the policy, and optionally create a policy record, if you want to put it into production immeidately. This policy DNS record will be the public entry point to the load-balanced configuration, so it *must* match the installed route name in the CF routing tier. 
+6. Save the policy, and optionally create a policy record, if you want to put it into production immeidately. This policy DNS record will be the public entry point to the load-balanced configuration, so it *must* match the installed route name in the CF routing tier. 
 <img src="images/aws/AWSTrafficflowpolicycreation.png">
-6. If you didn't attach a policy name at policy creation time, when you're ready to go to production, create the matching policy name and you're live.
+7. If you didn't attach a policy name at policy creation time, when you're ready to go to production, create the matching policy name and you're live.
 
 ##Dyn
 ###Prerequisites
