@@ -262,13 +262,14 @@ When complete, you should see some auto-generated A records show up in your DNS 
 2. You must create site-specific DNS A records that point to the API endpoint of each your site installations, i.e. "api.sys.site-a.pcflab.net". Check that this is working by checking for the health status in a browser, e.g. "https://api.sys.site-a.pcflab.net/v2/info".
 
 ### Steps
-1. Create a Traffic Management profile in the new portal. Important note: The name that you provide here becomes the public DNS target for your load-balanced configuration, "c0.trafficmanager.net" in this example.<br>
+1. If you don't see "Traffic Manager profiles" in the new portal, click on the "Browse". The services will be alphabetically listed.  
+2. Create a Traffic Management profile in the new portal. Important note: The name that you provide here becomes the public DNS target for your load-balanced configuration, "c0.trafficmanager.net" in this example.<br>
 <img src="images/azure/1-Add-TMProfile.png">
-2. Create a new Traffic Management policy. In this example, we'll use equal weights across sites, providing an active/active configuration. You could also opt for Failover if you wanted active/passive or performance-based to direct clients to their "nearest"<br>
+3. Create a new Traffic Management policy. In this example, we'll use equal weights across sites, providing an active/active configuration. You could also opt for Failover if you wanted active/passive or performance-based to direct clients to their "nearest"<br>
 <img src="images/azure/2-CreateTM.png">
-3. "Configuration" panel: Set up your health checks for HTTPS on port 443 using /v2/info, if health checking is desired.<br>
+4. "Configuration" panel: Set up your health checks for HTTPS on port 443 using /v2/info, if health checking is desired.<br>
 <img src="images/azure/3-ConfigureTM.png"/>
-4. Endpoint panel - in this example, we'll use equal weights across sites, providing an active/active configuration.<br>
+5. Endpoint panel - in this example, we'll use equal weights across sites, providing an active/active configuration.<br>
 <img src="images/azure/4-Endpoint.png"/>
 <br>Health checking starts once you've saved your endpoints.<br>
 <img src="images/azure/5-checking.png"/>
